@@ -55,8 +55,7 @@ extension AuthCoordinator: AuthDelegate {
             if error != nil {
                 
             } else {
-                self?.firebase.usersRef.childByAppendingPath(authData.uid).setValue(["username" : account.username, "fullName" : account.userFullName])
-                NSUserDefaults.standardUserDefaults().setValue(authData.uid, forKey: "uid")
+                self?.firebase.usersRef.childByAppendingPath(authData.uid).updateChildValues(["username" : account.username, "fullName" : account.userFullName])
                 strongSelf.navCtrl.popViewControllerAnimated(false)
                 strongSelf.delegate?.didAuthenticate(strongSelf)
             }
