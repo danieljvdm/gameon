@@ -15,6 +15,5 @@ class ChatsCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        print("hi")
     }
 }

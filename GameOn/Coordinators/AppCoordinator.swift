@@ -23,10 +23,8 @@ final class AppCoordinator: CoordinatorType {
     
     func start() {
         if userAuthenticated {
-            print("Authenticated")
             presentChat()
         } else {
-            print("Not Authenticated")
             presentAuth()
         }
     }

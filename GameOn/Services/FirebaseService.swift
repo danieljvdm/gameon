@@ -39,6 +39,30 @@ class FirebaseService {
         rootRef = Firebase(url: baseUrl)
     }
     
+    //MARK: - Friends functions
+    func getFriends() -> Observable<[User]> {
+        return Observable.create { [unowned self] observer in
+            self.usersRef.observeSingleEventOfType(.Value) { [unowned self] (snapshot: FDataSnapshot!) in
+                var friends = [User]()
+
+                for child in snapshot.children {
+                    let uid = child.key!
+                    let childSnapshot = snapshot.childSnapshotForPath(uid)
+                    let username = childSnapshot.value["username"] as! String
+                    let fullName = childSnapshot.value["fullName"] as! String
+                    let friend = User(uid: uid, username: username, fullName: fullName)
+                    friends.append(friend)
+                }
+                
+                observer.onNext(friends.filter { $0.uid != self.uid } )
+                observer.onCompleted()
+            }
+            
+            return AnonymousDisposable {}
+        }
+    }
+
+    //MARK: - Chat functions
     func getChatWith(user: User) -> Observable<Chat> {
         return Observable.create { [unowned self] observer in
             let ref = self.userChatsRef.childByAppendingPath(user.uid)
@@ -90,8 +114,6 @@ class FirebaseService {
     }
     
     func isTyping(bool: Bool, in chat: Chat) {
-        print(bool)
-        print(chat)
         let userTypingRef = refForChat(chat).childByAppendingPath("typingIndicator/\(uid)")
         userTypingRef.setValue(bool)
         userTypingRef.onDisconnectRemoveValue()

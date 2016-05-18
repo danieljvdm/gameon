@@ -55,19 +55,7 @@ final class ChatCoordinator: CoordinatorType {
     func pushFriendsScreen() {
         var vc = R.storyboard.chats.friendsVC()!
         vc.delegate = self
-        let friends = firebase.usersRef.rx_observe(.Value).map { [unowned self] (snapshot: FDataSnapshot) -> [User] in
-            var friends = [User]()
-            for child in snapshot.children {
-                let uid = child.key!!
-                let childSnapshot = snapshot.childSnapshotForPath(uid)
-                let username = childSnapshot.value["username"] as! String
-                let fullName = childSnapshot.value["fullName"] as! String
-                let friend = User(uid: uid, username: username, fullName: fullName)
-                friends.append(friend)
-            }
-            return friends.filter {$0.uid != self.firebase.uid}
-        }
-        vc.inject(FriendsViewModel(friends: friends))
+        vc.inject(FriendsViewModel(friends: firebase.getFriends()))
         let navC = UINavigationController(rootViewController: vc)
         navCtrl.viewControllers.last?.presentViewController(navC, animated: false, completion: nil)
     }
