@@ -13,15 +13,19 @@ import RxSwift
 import FirebaseRxSwiftExtensions
 
 struct ChatViewModel: ViewModelType {
+    private let chat: Chat
     private let user: User
     var messages: Variable<[JSQMessage]>
-    var typing = Variable<Bool>(false)
+    var typing: Variable<Bool>
+    
     var title: String {
         return user.fullName
     }
     
-    init(user: User, messages: Variable<[JSQMessage]>){
+    init(chat: Chat, user: User){
+        self.chat = chat
+        self.messages = chat.messages
+        self.typing = chat.typing
         self.user = user
-        self.messages = messages
     }
 }

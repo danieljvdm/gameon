@@ -47,8 +47,11 @@ class ChatVC: JSQMessagesViewController, Injectable {
     
     func bindViewModel() {
         viewModel.messages.asObservable().subscribeNext { [unowned self] message in
-            print(message)
             self.finishReceivingMessage()
+        }.addDisposableTo(disposeBag)
+        
+        viewModel.typing.asObservable().subscribeNext { [unowned self] bool in
+            self.showTypingIndicator = bool
         }.addDisposableTo(disposeBag)
     }
     
@@ -69,6 +72,10 @@ class ChatVC: JSQMessagesViewController, Injectable {
     override func textViewDidChange(textView: UITextView) {
         super.textViewDidChange(textView)
         isTyping = textView.text != ""
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        isTyping = false
     }
 }
 
