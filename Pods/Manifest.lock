@@ -1,0 +1,37 @@
+PODS:
+  - Firebase (2.5.1)
+  - FirebaseRxSwiftExtensions (2.0.9):
+    - Firebase (~> 2.5.1)
+    - FirebaseOSX (~> 2.5.1)
+    - RxSwift (~> 2.2)
+  - JSQMessagesViewController (7.2.0):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
+  - R.swift (2.2.2):
+    - R.swift.Library (~> 2.1.0)
+  - R.swift.Library (2.1.0)
+  - RxCocoa (2.4):
+    - RxSwift (~> 2.4)
+  - RxSwift (2.4)
+
+DEPENDENCIES:
+  - Firebase
+  - FirebaseRxSwiftExtensions
+  - JSQMessagesViewController
+  - R.swift
+  - RxCocoa
+  - RxSwift
+
+SPEC CHECKSUMS:
+  Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
+  FirebaseRxSwiftExtensions: 9daee9e12cd2885c27547b2d5afe985ee193ac32
+  JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  R.swift: ed40b24d65ad70c6cf48a2f249a26a3e5a4a7bc0
+  R.swift.Library: e5e077ed04f6867a95676af491650091b23518e9
+  RxCocoa: 7d6cd877de99f5640306b3d6cf87f580c1d91b61
+  RxSwift: 67b9ef4e8b34fb394e200e754c6a09cc16559f94
+
+PODFILE CHECKSUM: 987a53edcc8acef61bf51d342552149a7d3727cf
+
+COCOAPODS: 1.0.0

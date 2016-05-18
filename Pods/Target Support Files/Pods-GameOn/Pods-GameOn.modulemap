@@ -1,0 +1,6 @@
+framework module Pods_GameOn {
+  umbrella header "Pods-GameOn-umbrella.h"
+
+  export *
+  module * { export * }
+}
