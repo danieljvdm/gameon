@@ -10,7 +10,6 @@ import Foundation
 import JSQMessagesViewController
 import Firebase
 import RxSwift
-import FirebaseRxSwiftExtensions
 
 struct ChatViewModel: ViewModelType {
     private let chat: Chat

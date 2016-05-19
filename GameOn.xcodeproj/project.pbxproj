@@ -32,13 +32,13 @@
 		652F60F71CE7DEFB00B6D5DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 652F60F61CE7DEFB00B6D5DA /* Assets.xcassets */; };
 		652F60FA1CE7DEFB00B6D5DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 652F60F81CE7DEFB00B6D5DA /* LaunchScreen.storyboard */; };
 		65746AD01CEAB7F8008E2699 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65746ACF1CEAB7F8008E2699 /* Message.swift */; };
-		659133341CE933A800E4CE49 /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 659133331CE933A800E4CE49 /* TwitterAuthHelper.m */; };
 		659133381CE9410B00E4CE49 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659133371CE9410B00E4CE49 /* FirebaseService.swift */; };
 		6591333A1CE9504100E4CE49 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 659133391CE9504100E4CE49 /* Authentication.storyboard */; };
 		6591333C1CE9527500E4CE49 /* AuthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591333B1CE9527500E4CE49 /* AuthVC.swift */; };
 		6591333F1CE9563000E4CE49 /* Injectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6591333E1CE9563000E4CE49 /* Injectable.swift */; };
 		659133421CE9574300E4CE49 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659133411CE9574300E4CE49 /* AuthViewModel.swift */; };
 		659133451CE9601800E4CE49 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659133441CE9601800E4CE49 /* R.generated.swift */; };
+		6596A9451CED3260009BFEE8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6596A9441CED3260009BFEE8 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,15 +71,13 @@
 		652F60F91CE7DEFB00B6D5DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		652F60FB1CE7DEFB00B6D5DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65746ACF1CEAB7F8008E2699 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
-		659133321CE933A800E4CE49 /* TwitterAuthHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAuthHelper.h; sourceTree = "<group>"; };
-		659133331CE933A800E4CE49 /* TwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAuthHelper.m; sourceTree = "<group>"; };
-		659133351CE9340900E4CE49 /* GameOn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GameOn-Bridging-Header.h"; sourceTree = "<group>"; };
 		659133371CE9410B00E4CE49 /* FirebaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseService.swift; path = Services/FirebaseService.swift; sourceTree = "<group>"; };
 		659133391CE9504100E4CE49 /* Authentication.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Authentication.storyboard; path = Storyboards/Authentication.storyboard; sourceTree = "<group>"; };
 		6591333B1CE9527500E4CE49 /* AuthVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthVC.swift; path = Views/Authenticate/AuthVC.swift; sourceTree = "<group>"; };
 		6591333E1CE9563000E4CE49 /* Injectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Injectable.swift; path = Protocols/Injectable.swift; sourceTree = "<group>"; };
 		659133411CE9574300E4CE49 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewModel.swift; path = Views/Authenticate/AuthViewModel.swift; sourceTree = "<group>"; };
 		659133441CE9601800E4CE49 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		6596A9441CED3260009BFEE8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,10 +203,8 @@
 				652F60F61CE7DEFB00B6D5DA /* Assets.xcassets */,
 				652F60F81CE7DEFB00B6D5DA /* LaunchScreen.storyboard */,
 				652F60FB1CE7DEFB00B6D5DA /* Info.plist */,
-				659133321CE933A800E4CE49 /* TwitterAuthHelper.h */,
-				659133331CE933A800E4CE49 /* TwitterAuthHelper.m */,
-				659133351CE9340900E4CE49 /* GameOn-Bridging-Header.h */,
 				659133441CE9601800E4CE49 /* R.generated.swift */,
+				6596A9441CED3260009BFEE8 /* GoogleService-Info.plist */,
 			);
 			path = GameOn;
 			sourceTree = "<group>";
@@ -272,6 +268,7 @@
 				652F60EA1CE7DEFB00B6D5DA /* Resources */,
 				57A4A4CF45D568D46C3332F0 /* 📦 Embed Pods Frameworks */,
 				848CCFBE29190CBF167B6B0B /* 📦 Copy Pods Resources */,
+				6596A9461CED5BED009BFEE8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -325,6 +322,7 @@
 				652F60F71CE7DEFB00B6D5DA /* Assets.xcassets in Resources */,
 				652F60F51CE7DEFB00B6D5DA /* Main.storyboard in Resources */,
 				6591333A1CE9504100E4CE49 /* Authentication.storyboard in Resources */,
+				6596A9451CED3260009BFEE8 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,6 +372,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"";
 		};
+		6596A9461CED5BED009BFEE8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 01a8dd1ac8e22f21ea19de7ec42f9e94d12b319e 433559b07bbbb23f6d3c7e168f45b41ff1a21df4a10e428521f467961c6b271b";
+		};
 		848CCFBE29190CBF167B6B0B /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -407,7 +418,6 @@
 				6591333F1CE9563000E4CE49 /* Injectable.swift in Sources */,
 				650A88231CEB799A00FFC8BE /* FriendsViewModel.swift in Sources */,
 				652EB8E71CEA36B8009E48A4 /* Reactive.swift in Sources */,
-				659133341CE933A800E4CE49 /* TwitterAuthHelper.m in Sources */,
 				652EB8EE1CEA4672009E48A4 /* User.swift in Sources */,
 				650A88271CEBB3FA00FFC8BE /* Chat.swift in Sources */,
 				652EB8EB1CEA3BB2009E48A4 /* ViewModelType.swift in Sources */,
@@ -540,7 +550,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danieljvdm.GameOn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "GameOn/GameOn-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -555,7 +564,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.danieljvdm.GameOn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "GameOn/GameOn-Bridging-Header.h";
 			};
 			name = Release;
 		};

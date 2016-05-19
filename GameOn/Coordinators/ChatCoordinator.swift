@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import FirebaseRxSwiftExtensions
 import Firebase
 import RxSwift
 import JSQMessagesViewController

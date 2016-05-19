@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Firebase
+import Fabric
+import TwitterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var coordinator: AppCoordinator?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        FIRApp.configure()
+        FIRDatabase.database().persistenceEnabled = true
+        Fabric.with([Twitter.self])
+
         let navCtrl = UINavigationController()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window?.rootViewController = navCtrl

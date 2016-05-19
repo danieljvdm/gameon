@@ -7,7 +7,6 @@
 //
 import Firebase
 import RxSwift
-import FirebaseRxSwiftExtensions
 
 class ChatsViewModel: ViewModelType {
     var friends = Variable<[User]>([])

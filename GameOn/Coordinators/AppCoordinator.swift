@@ -15,14 +15,10 @@ final class AppCoordinator: CoordinatorType {
     var navCtrl: UINavigationController!
     var firebase: FirebaseService!
 
-    var userAuthenticated: Bool {
-        return firebase.rootRef.authData != nil
-    }
-
     var coordinators = [CoordinatorType]()
     
     func start() {
-        if userAuthenticated {
+        if firebase.uid != nil {
             presentChat()
         } else {
             presentAuth()

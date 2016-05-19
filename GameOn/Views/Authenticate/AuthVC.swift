@@ -9,6 +9,8 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import FirebaseAuth
+import TwitterKit
 
 protocol AuthDelegate: class {
     func didSelectTwitter(vc: AuthVC)
@@ -19,6 +21,7 @@ final class AuthVC: UIViewController, Injectable {
     @IBOutlet weak var twitterButton: UIButton!
     var viewModel: AuthViewModel!
     weak var delegate: AuthDelegate?
+    var twitterLogin: TWTRLogInCompletion?
     
     private let disposeBag = DisposeBag()
     
@@ -29,6 +32,13 @@ final class AuthVC: UIViewController, Injectable {
     }
     
     private func configureViews() {
+        let logInButton = TWTRLogInButton(logInCompletion: twitterLogin!)
+        
+        // TODO: Change where the log in button is positioned in your view
+        logInButton.center = self.view.center
+        self.view.addSubview(logInButton)
+
+        
         twitterButton.rx_tap
             .subscribeNext { [weak self] in
                 guard let strongSelf = self else { return }
