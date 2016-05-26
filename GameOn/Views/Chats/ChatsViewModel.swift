@@ -9,26 +9,9 @@ import Firebase
 import RxSwift
 
 class ChatsViewModel: ViewModelType {
-    var friends = Variable<[User]>([])
+    let chats: Observable<[ChatSummary]>
     
-    init(){
-//        FirebaseService.Constants.usersRef.observeSingleEventOfType(.Value) { (snapshot: FDataSnapshot!) in
-//            for child in snapshot.children {
-//                let uid = child.key
-//                let childSnapshot = snapshot.childSnapshotForPath(uid)
-//                let username = childSnapshot.value["username"] as! String
-//                let fullName = childSnapshot.value["fullName"] as! String
-//                let friend = User(uid: uid, username: username, fullName: fullName)
-//                self.friends.value.append(friend)
-//            }
-//        }
-        
-//        FirebaseService.Constants.usersRef.observeEventType(.ChildAdded) { (snapshot: FDataSnapshot!) in
-//            let uid = snapshot.key
-//            let username = snapshot.value["username"] as! String
-//            let fullName = snapshot.value["fullName"] as! String
-//            let friend = User(uid: uid, username: username, fullName: fullName)
-//            self.friends.value.append(friend)
-//        }
+    init(chats: Observable<[ChatSummary]>){
+        self.chats = chats
     }
 }

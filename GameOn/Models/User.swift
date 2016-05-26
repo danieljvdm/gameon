@@ -10,10 +10,10 @@ import Foundation
 
 struct User {
     let uid: String
-    let username: String
-    let fullName: String
+    let username: String?
+    let fullName: String?
     
-    init(uid: String, username: String, fullName: String){
+    init(uid: String, username: String? = nil, fullName: String? = nil){
         self.uid = uid
         self.username = username
         self.fullName = fullName

@@ -28,14 +28,14 @@ final class ChatCoordinator: CoordinatorType {
     
     func presentChatsScreen() {
         var vc = R.storyboard.chats.chatsVC()!
-        firebase.userChatsRef
-        vc.inject(ChatsViewModel())
+        let chats = ChatsViewModel(chats: firebase.getActiveChats())
+        vc.inject(chats)
         vc.delegate = self
         navCtrl.pushViewController(vc, animated: false)
     }
     
     func pushChatScreen(user: User) {
-        firebase.getChatWith(user).subscribeNext { chat in
+        firebase.getChat(for: user).subscribeNext { chat in
             var vc = R.storyboard.chats.chatVC()!
             vc.inject(ChatViewModel(chat: chat, user: user))
             vc.messageAdded = { [unowned self] text in
@@ -46,8 +46,8 @@ final class ChatCoordinator: CoordinatorType {
             }
             
             vc.senderId = self.firebase.uid
-            vc.senderDisplayName = user.fullName
-            self.navCtrl.pushViewController(vc, animated: false)
+            vc.senderDisplayName = user.fullName ?? ""
+            self.navCtrl.pushViewController(vc, animated: true)
         }.addDisposableTo(disposeBag)
     }
     
@@ -56,13 +56,13 @@ final class ChatCoordinator: CoordinatorType {
         vc.delegate = self
         vc.inject(FriendsViewModel(friends: firebase.getFriends()))
         let navC = UINavigationController(rootViewController: vc)
-        navCtrl.viewControllers.last?.presentViewController(navC, animated: false, completion: nil)
+        navCtrl.viewControllers.last?.presentViewController(navC, animated: true, completion: nil)
     }
 }
 
 extension ChatCoordinator: ChatsDelegate {
-    func didSelectUser(user: User) {
-        pushChatScreen(user)
+    func didSelectChat(chat: ChatSummary) {
+        pushChatScreen(chat.user)
     }
     
     func didAddChat() {

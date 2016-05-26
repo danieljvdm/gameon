@@ -31,6 +31,8 @@
 		652F60F51CE7DEFB00B6D5DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 652F60F31CE7DEFB00B6D5DA /* Main.storyboard */; };
 		652F60F71CE7DEFB00B6D5DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 652F60F61CE7DEFB00B6D5DA /* Assets.xcassets */; };
 		652F60FA1CE7DEFB00B6D5DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 652F60F81CE7DEFB00B6D5DA /* LaunchScreen.storyboard */; };
+		6565F77A1CEE60DC008BBC56 /* UserDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6565F7791CEE60DC008BBC56 /* UserDetailsVC.swift */; };
+		6565F77C1CEEAC86008BBC56 /* ChatSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6565F77B1CEEAC86008BBC56 /* ChatSummary.swift */; };
 		65746AD01CEAB7F8008E2699 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65746ACF1CEAB7F8008E2699 /* Message.swift */; };
 		659133381CE9410B00E4CE49 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659133371CE9410B00E4CE49 /* FirebaseService.swift */; };
 		6591333A1CE9504100E4CE49 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 659133391CE9504100E4CE49 /* Authentication.storyboard */; };
@@ -70,6 +72,8 @@
 		652F60F61CE7DEFB00B6D5DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		652F60F91CE7DEFB00B6D5DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		652F60FB1CE7DEFB00B6D5DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6565F7791CEE60DC008BBC56 /* UserDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDetailsVC.swift; path = Views/Authenticate/UserDetailsVC.swift; sourceTree = "<group>"; };
+		6565F77B1CEEAC86008BBC56 /* ChatSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatSummary.swift; path = Models/ChatSummary.swift; sourceTree = "<group>"; };
 		65746ACF1CEAB7F8008E2699 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
 		659133371CE9410B00E4CE49 /* FirebaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FirebaseService.swift; path = Services/FirebaseService.swift; sourceTree = "<group>"; };
 		659133391CE9504100E4CE49 /* Authentication.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Authentication.storyboard; path = Storyboards/Authentication.storyboard; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 				652EB8ED1CEA4672009E48A4 /* User.swift */,
 				65746ACF1CEAB7F8008E2699 /* Message.swift */,
 				650A88261CEBB3FA00FFC8BE /* Chat.swift */,
+				6565F77B1CEEAC86008BBC56 /* ChatSummary.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -242,6 +247,7 @@
 			children = (
 				6591333B1CE9527500E4CE49 /* AuthVC.swift */,
 				659133411CE9574300E4CE49 /* AuthViewModel.swift */,
+				6565F7791CEE60DC008BBC56 /* UserDetailsVC.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -411,6 +417,7 @@
 				652EB8F01CEA8544009E48A4 /* ChatViewModel.swift in Sources */,
 				659133451CE9601800E4CE49 /* R.generated.swift in Sources */,
 				650A88211CEB777E00FFC8BE /* FriendsVC.swift in Sources */,
+				6565F77C1CEEAC86008BBC56 /* ChatSummary.swift in Sources */,
 				650A88251CEB86A000FFC8BE /* FriendCell.swift in Sources */,
 				651704611CE80C14008C27EB /* CoordinatorType.swift in Sources */,
 				6517045F1CE80B1B008C27EB /* AppCoordinator.swift in Sources */,
@@ -425,6 +432,7 @@
 				651704731CE81C22008C27EB /* ChatCoordinator.swift in Sources */,
 				659133381CE9410B00E4CE49 /* FirebaseService.swift in Sources */,
 				652EB8E01CEA1494009E48A4 /* AuthCoordinator.swift in Sources */,
+				6565F77A1CEE60DC008BBC56 /* UserDetailsVC.swift in Sources */,
 				652EB8E31CEA2541009E48A4 /* Array+Extensions.swift in Sources */,
 				651704691CE81AE8008C27EB /* ChatVC.swift in Sources */,
 				65746AD01CEAB7F8008E2699 /* Message.swift in Sources */,

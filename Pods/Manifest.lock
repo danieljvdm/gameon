@@ -1,4 +1,7 @@
 PODS:
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
   - Fabric (1.6.7)
   - Firebase (3.2.0):
     - Firebase/Core (= 3.2.0)
@@ -46,6 +49,7 @@ PODS:
     - TwitterCore (= 2.1.1)
 
 DEPENDENCIES:
+  - ChameleonFramework/Swift
   - Fabric
   - Firebase
   - Firebase/Auth
@@ -58,6 +62,7 @@ DEPENDENCIES:
   - TwitterKit
 
 SPEC CHECKSUMS:
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   Firebase: 6d4012da1598732a2b43f16d8355eca90f94ed59
   FirebaseAnalytics: 6f75b04e6bfb8e0b6e9ef298e04c24eea3b13863
@@ -77,6 +82,6 @@ SPEC CHECKSUMS:
   TwitterCore: abc46da2bc4b76e2c68a74cd8671a071a8e3abbf
   TwitterKit: 38232c31f622db1f26a5952436eaa88d10763fd0
 
-PODFILE CHECKSUM: 66678c90a9fa69a22612d084bd9016adfd930133
+PODFILE CHECKSUM: af253d7e56c7502efd6eeda43f9b6ece087f1d73
 
 COCOAPODS: 1.0.0

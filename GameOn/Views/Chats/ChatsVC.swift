@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 protocol ChatsDelegate: class {
-    func didSelectUser(_: User)
+    func didSelectChat(_: ChatSummary)
     func didAddChat()
 }
 
@@ -26,26 +26,33 @@ class ChatsVC: UIViewController, Injectable, Reactive {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
         bindViewModel()
         configureView()
     }
     
     func bindViewModel() {
-        viewModel.friends
+        viewModel.chats
             .asObservable()
-            .bindTo(tableView.rx_itemsWithCellIdentifier("cell", cellType: ChatsCell.self)) { (index, model, cell) in
-                cell.nameLabel.text = model.fullName
-                cell.lastMessageLabel.text = model.username
+            .bindTo(tableView.rx_itemsWithCellIdentifier("cell", cellType: ChatsCell.self)) { [unowned self](index, model, cell) in
+                cell.nameLabel.text = model.user.fullName
+                model.lastMessage.map {$0.text}.bindTo(cell.lastMessageLabel.rx_text).addDisposableTo(self.disposeBag)
         }.addDisposableTo(disposeBag)
     }
     
     func configureView() {
-        tableView.rx_modelSelected(User.self).subscribeNext { [weak self] user in
-            self?.delegate?.didSelectUser(user)
+        tableView.rx_modelSelected(ChatSummary.self).subscribeNext { [weak self] chat in
+            self?.delegate?.didSelectChat(chat)
         }.addDisposableTo(disposeBag)
         
         addButton.rx_tap.subscribeNext { [unowned self] in
             self.delegate?.didAddChat()
         }.addDisposableTo(disposeBag)
+    }
+}
+
+extension ChatsVC: UITableViewDelegate {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 65.0
     }
 }

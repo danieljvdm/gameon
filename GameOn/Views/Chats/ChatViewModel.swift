@@ -17,7 +17,7 @@ struct ChatViewModel: ViewModelType {
     var messages: Variable<[JSQMessage]>
     var typing: Variable<Bool>
     
-    var title: String {
+    var title: String? {
         return user.fullName
     }
     

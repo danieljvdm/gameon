@@ -14,6 +14,7 @@ import TwitterKit
 
 protocol AuthDelegate: class {
     func didSelectTwitter(vc: AuthVC)
+    func selectedAnonymous(vc: AuthVC)
 }
 
 final class AuthVC: UIViewController, Injectable {
@@ -37,12 +38,11 @@ final class AuthVC: UIViewController, Injectable {
         // TODO: Change where the log in button is positioned in your view
         logInButton.center = self.view.center
         self.view.addSubview(logInButton)
-
         
         twitterButton.rx_tap
             .subscribeNext { [weak self] in
                 guard let strongSelf = self else { return }
-                strongSelf.delegate?.didSelectTwitter(strongSelf)
+                strongSelf.delegate?.selectedAnonymous(strongSelf)
             }.addDisposableTo(disposeBag)
     }
     

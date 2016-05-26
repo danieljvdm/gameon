@@ -149,8 +149,11 @@
                             <constraint firstAttribute="trailing" secondItem="bH3-zQ-ddh" secondAttribute="trailing" id="h9U-nF-G54"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Friends" id="fbA-Ya-9HJ"/>
+                    <navigationItem key="navigationItem" title="Friends" id="fbA-Ya-9HJ">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="1NW-lr-x6y"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="cancelButton" destination="1NW-lr-x6y" id="Vy1-7H-fQq"/>
                         <outlet property="tableView" destination="bH3-zQ-ddh" id="RGX-4h-4aa"/>
                     </connections>
                 </viewController>

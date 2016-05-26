@@ -16,7 +16,9 @@ protocol FriendsDelegate: class {
 
 class FriendsVC: UIViewController, Injectable, Reactive {
 
+    @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+    
     var viewModel: FriendsViewModel!
     weak var delegate: FriendsDelegate?
     private let disposeBag = DisposeBag()
@@ -38,6 +40,10 @@ class FriendsVC: UIViewController, Injectable, Reactive {
     func configureView() {
         tableView.rx_modelSelected(User.self).subscribeNext { [unowned self] user in
             self.delegate?.friendSelected(user, vc: self)
+        }.addDisposableTo(disposeBag)
+        
+        cancelButton.rx_tap.subscribeNext { [unowned self] in
+            self.dismissViewControllerAnimated(true, completion: nil)
         }.addDisposableTo(disposeBag)
     }
     

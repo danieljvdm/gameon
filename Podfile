@@ -14,5 +14,6 @@ target 'GameOn' do
   pod 'Fabric'
   pod 'TwitterKit'
   pod 'TwitterCore'
+  pod 'ChameleonFramework/Swift'
 
 end

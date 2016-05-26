@@ -33,6 +33,29 @@ class FirebaseService {
         return rootRef.child("chats")
     }
     
+    func isLoggedIn() -> Observable<Bool> {
+        return Observable.create { observer in
+            FIRAuth.auth()?.addAuthStateDidChangeListener { auth, user in
+                if user != nil {
+                    observer.onNext(true)
+                } else {
+                    observer.onNext(false)
+                }
+            }
+            return AnonymousDisposable {}
+        }
+    }
+    
+    func authenticate(credential: FIRAuthCredential) -> Observable<FIRUser?> {
+        return Observable.create { observer in
+            FIRAuth.auth()?.signInWithCredential(credential) { user, error in
+                observer.onNext(user)
+                observer.onCompleted()
+            }
+            return AnonymousDisposable {}
+        }
+    }
+    
     //MARK: - Friends functions
     func getFriends() -> Observable<[User]> {
         return Observable.create { [unowned self] observer in
@@ -40,37 +63,61 @@ class FirebaseService {
                 var friends = [User]()
                 for case let child as FIRDataSnapshot in snapshot.children {
                     let uid = child.key
-                    let username = child.valueForKey("username") as! String
-                    let fullName = child.valueForKey("fullName") as! String
+                    let username = child.value!["username"] as! String
+                    let fullName = child.value!["fullName"] as! String
                     let friend = User(uid: uid, username: username, fullName: fullName)
                     friends.append(friend)
                 }
-                
                 observer.onNext(friends.filter { $0.uid != self.uid } )
                 observer.onCompleted()
             }
             
-            return AnonymousDisposable {}
+            return AnonymousDisposable {
+            
+            }
         }
     }
 
     //MARK: - Chat functions
-//    func getChats(for user: User) -> Observable<[Chat]> {
-//    
-//    }
+    func getActiveChats() -> Observable<[ChatSummary]> {
+        let chats = Variable<[ChatSummary]>([])
+        self.userChatsRef.observeEventType(.ChildAdded) { [unowned self] (chatSnapshot: FIRDataSnapshot) in
+            let chatUserRef = self.usersRef.child(chatSnapshot.key)
+            let chatId = chatSnapshot.value!["chatId"] as! String
+            let chatRef = self.chatsRef.child("\(chatId)/messages")
+            let lastMessage = Variable<Message>(Message(senderId: "", text: ""))
+            chatUserRef.observeSingleEventOfType(.Value) { (snapshot: FIRDataSnapshot) in
+                let uid = snapshot.key
+                let username = snapshot.value!["username"] as! String
+                let fullName = snapshot.value!["fullName"] as! String
+                let user = User(uid: uid, username: username, fullName: fullName)                
+                chatRef.queryLimitedToLast(1).observeEventType(.Value) { (snapshot: FIRDataSnapshot) in
+                    guard let childSnapshot = snapshot.children.allObjects.first as? FIRDataSnapshot else { return }
+                    let messageText = childSnapshot.value!["text"] as! String
+                    let senderId = childSnapshot.value!["senderId"] as! String
+                    lastMessage.value = Message(senderId: senderId, text: messageText)
+                }
+                let chat = ChatSummary(chatId: chatId, user: user, lastMessage: lastMessage.asObservable())
+                chats.value.append(chat)    
+            }
+           
+        }
+        return chats.asObservable()
+    }
     
-    func getChatWith(user: User) -> Observable<Chat> {
+    func getChat(for user: User) -> Observable<Chat> {
         return Observable.create { [unowned self] observer in
             let ref = self.userChatsRef.child(user.uid)
             ref.observeSingleEventOfType(.Value) { [unowned self] (snapshot: FIRDataSnapshot) in
                 var chatRef: FIRDatabaseReference
+                
+                //Check if a chat with this user already exists
                 if let value = snapshot.value as? NSDictionary {
                     chatRef = self.chatsRef.child(value["chatId"] as! String)
                 } else {
                     chatRef = self.chatsRef.childByAutoId()
-                    chatRef.child("typingIndicator").setValue([self.uid! : false, user.uid : false])
                     ref.setValue(["chatId" : chatRef.key])
-                    let ref2 = self.usersRef.child("\(user.uid)/chats/\(self.uid)")
+                    let ref2 = self.usersRef.child("\(user.uid)/chats/\(self.uid!)")
                     ref2.setValue(["chatId" : chatRef.key])
                 }
                 
@@ -91,7 +138,6 @@ class FirebaseService {
                     if snapshot.childrenCount == 1 && snapshot.hasChild(self.uid!) {
                         return
                     }
-                    
                     typing.value = snapshot.childrenCount > 0
                 }
                 
@@ -107,11 +153,11 @@ class FirebaseService {
         let messageRef = refForChat(chat).child("messages").childByAutoId()
         let message = ["senderId" : uid!, "text": text]
         messageRef.setValue(message)
-        refForChat(chat).updateChildValues(["lastMessageAt" : NSDate().timeIntervalSince1970 * 1000])
+        refForChat(chat).updateChildValues(FIRServerValue.timestamp())
     }
     
     func isTyping(bool: Bool, in chat: Chat) {
-        let userTypingRef = refForChat(chat).child("typingIndicator/\(uid)")
+        let userTypingRef = refForChat(chat).child("typingIndicator/\(uid!)")
         userTypingRef.setValue(bool)
         userTypingRef.onDisconnectRemoveValue()
     }

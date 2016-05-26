@@ -14,24 +14,24 @@ import Firebase
 final class AppCoordinator: CoordinatorType {
     var navCtrl: UINavigationController!
     var firebase: FirebaseService!
-
+    private let disposeBag = DisposeBag()
     var coordinators = [CoordinatorType]()
     
     func start() {
-        if firebase.uid != nil {
-            presentChat()
-        } else {
+        try! FIRAuth.auth()?.signOut()
+        if FIRAuth.auth()?.currentUser == nil {
             presentAuth()
+        } else {
+            presentChat()
         }
     }
     
     func presentAuth() {
         let coordinator = AuthCoordinator(root: navCtrl, firebase: firebase)
         coordinator.delegate = self
-        coordinator.start()
         coordinators.append(coordinator)
+        coordinator.start()
     }
-    
     
     func presentChat() {
         let coordinator = ChatCoordinator(root: navCtrl, firebase: firebase)

@@ -9,6 +9,7 @@
 import UIKit
 import Accounts
 import Firebase
+import RxSwift
 
 protocol AuthCoordinatorDelegate: class {
     func didAuthenticate(coordinator: AuthCoordinator)
@@ -17,28 +18,43 @@ protocol AuthCoordinatorDelegate: class {
 final class AuthCoordinator: CoordinatorType {
     var navCtrl: UINavigationController!
     var firebase: FirebaseService!
-    
     weak var delegate: AuthCoordinatorDelegate?
+    private let disposeBag = DisposeBag()
     
     func start() {
+        pushAuth()
+    }
+    
+    func pushAuth() {
         let vc = R.storyboard.authentication.authVC()!
         vc.delegate = self
         vc.twitterLogin = { session, error in
             if let session = session {
                 let credential = FIRTwitterAuthProvider.credentialWithToken(session.authToken, secret: session.authTokenSecret)
-                FIRAuth.auth()?.signInWithCredential(credential) { [unowned self] user, error in
-                    if let error = error {
-                        print(error.userInfo["NSUnderlyingError"])
-                    }
-                    if user != nil {
-                        self.navCtrl.popViewControllerAnimated(true)
-                        self.delegate?.didAuthenticate(self)
-                    }
-                }
+                self.firebase.authenticate(credential).subscribeNext { user in
+                    self.navCtrl.viewControllers = []
+                    self.delegate?.didAuthenticate(self)
+                }.addDisposableTo(self.disposeBag)
             }
         }
         vc.inject(AuthViewModel())
         navCtrl.pushViewController(vc, animated: false)
+    }
+    
+    func pushUserDetails() {
+        let vc = R.storyboard.authentication.userDetailsVC()!
+        vc.delegate = self
+        navCtrl.pushViewController(vc, animated: true)
+    }
+}
+
+extension AuthCoordinator: UserDetailsDelegate {
+    func didRegister(details: (username: String, fullname: String), vc: UserDetailsVC) {
+        if let user = FIRAuth.auth()?.currentUser {
+            self.firebase.usersRef.child(user.uid).setValue(["username" : details.username, "fullName" : details.fullname])
+            self.navCtrl.popViewControllerAnimated(false)
+            self.delegate?.didAuthenticate(self)
+        }
     }
 }
 
@@ -62,6 +78,11 @@ extension AuthCoordinator: AuthDelegate {
 //                vc.presentViewController(actionSheet, animated: true, completion: nil)
 //            }
 //        }
+
+    }
+    
+    func selectedAnonymous(vc: AuthVC) {
+        pushUserDetails()
 
     }
     
